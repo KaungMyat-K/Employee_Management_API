@@ -3,6 +3,8 @@ package com.employee.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+import com.employee.dto.ApiResponseDto;
+import com.employee.dto.DepartmentDto;
 import com.employee.dto.EmployeeDto;
 import com.employee.entity.Employee;
 
@@ -13,4 +15,5 @@ public interface EmployeeMapper {
 
     EmployeeDto mapToEmployeeDto(Employee employee);
     Employee mapToEmployee(EmployeeDto employeeDto);
+    ApiResponseDto maptoApiResponseDto(EmployeeDto employeeDto,DepartmentDto departmentDto);
 }

@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.employee.dto.ApiResponseDto;
 import com.employee.dto.EmployeeDto;
 import com.employee.services.EmployeeService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,10 +30,10 @@ public class EmployeeController {
     
 
     @GetMapping("{id}")
-    public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable("id") Long employeeId) {
+    public ResponseEntity<ApiResponseDto> getEmployeeById(@PathVariable("id") Long employeeId) {
         
-        EmployeeDto savedEmployeeDto = employeeService.getEmployeeById(employeeId);
-        return new ResponseEntity<>(savedEmployeeDto,HttpStatus.OK);
+        ApiResponseDto apiResponseDto = employeeService.getEmployeeById(employeeId);
+        return new ResponseEntity<>(apiResponseDto,HttpStatus.OK);
     }
     
 
