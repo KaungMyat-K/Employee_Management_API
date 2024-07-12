@@ -8,4 +8,6 @@ import com.organization.entity.Organization;
 @Repository
 public interface OrganizationRepo extends JpaRepository<Organization,Long> {
     
+    Organization findByOrganizationCode(String organizationCode);
+
 }
