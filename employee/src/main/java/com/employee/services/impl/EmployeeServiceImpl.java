@@ -62,11 +62,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         // DepartmentDto departmentDto = responseEntity.getBody();
     
         //WebClient sync
-        DepartmentDto departmentDto =  webClient.get().uri("http://localhost:8080/api/departments/"+employee.getDepartmentCode()).retrieve().bodyToMono(DepartmentDto.class).block();
+        DepartmentDto departmentDto =  webClient.get().uri("http://localhost:8080/api/departments/"+employee.getOrganizationCode()).retrieve().bodyToMono(DepartmentDto.class).block();
 
         //DepartmentDto departmentDto = apiClient.getDepartmentByDepartmentCode(employee.getDepartmentCode());
 
-        OrganizationDto organizationDto = webClient.get().uri("http://localhost:8080/api/organizations/"+employee.getDepartmentCode()).retrieve().bodyToMono(OrganizationDto.class).block();
+        OrganizationDto organizationDto = webClient.get().uri("http://localhost:8083/api/organizations/"+employee.getDepartmentCode()).retrieve().bodyToMono(OrganizationDto.class).block();
         EmployeeDto employeeDto = EmployeeMapper.INSTANCE.mapToEmployeeDto(employee);
         ApiResponseDto apiResponseDto = EmployeeMapper.INSTANCE.maptoApiResponseDto(employeeDto, departmentDto,organizationDto);
 
@@ -86,7 +86,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         departmentDto.setDepartmentDescription("something");
         departmentDto.setDepartmentCode("something");
 
-        OrganizationDto organizationDto = webClient.get().uri("http://localhost:8080/api/organizations/"+employee.getDepartmentCode()).retrieve().bodyToMono(OrganizationDto.class).block();
+        OrganizationDto organizationDto = webClient.get().uri("http://localhost:8083/api/organizations/"+employee.getOrganizationCode()).retrieve().bodyToMono(OrganizationDto.class).block();
         EmployeeDto employeeDto = EmployeeMapper.INSTANCE.mapToEmployeeDto(employee);
 
         ApiResponseDto apiResponseDto = EmployeeMapper.INSTANCE.maptoApiResponseDto(employeeDto, departmentDto,organizationDto);
