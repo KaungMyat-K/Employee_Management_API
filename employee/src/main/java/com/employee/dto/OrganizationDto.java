@@ -1,21 +1,22 @@
 package com.employee.dto;
 
+import java.time.LocalDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmployeeDto {
+public class OrganizationDto {
     
-    private Long id;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String departmentCode;
-    private String organizationCode;
 
+    private Long id;
+    private String organizationtName;
+    private String organizationDescription;
+    private String organizationCode;
+    private LocalDateTime createdDate;
 }

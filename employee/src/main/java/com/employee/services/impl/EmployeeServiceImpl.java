@@ -11,6 +11,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import com.employee.dto.ApiResponseDto;
 import com.employee.dto.DepartmentDto;
 import com.employee.dto.EmployeeDto;
+import com.employee.dto.OrganizationDto;
 import com.employee.entity.Employee;
 import com.employee.exception.ResourceNotFoundException;
 import com.employee.mapper.EmployeeMapper;
@@ -53,8 +54,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public ApiResponseDto getEmployeeById(Long employeeId) {
 
-        LOGGER.info("inside getEmployeeById method");
-        
+        LOGGER.info("inside getEmployeeById method");  
         Employee employee = employeeRepo.findById(employeeId).orElseThrow(()->new ResourceNotFoundException("Employee", "id", employeeId));
 
         //restTemplate sync
@@ -66,9 +66,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         //DepartmentDto departmentDto = apiClient.getDepartmentByDepartmentCode(employee.getDepartmentCode());
 
+        OrganizationDto organizationDto = webClient.get().uri("http://localhost:8080/api/organizations/"+employee.getDepartmentCode()).retrieve().bodyToMono(OrganizationDto.class).block();
         EmployeeDto employeeDto = EmployeeMapper.INSTANCE.mapToEmployeeDto(employee);
-
-        ApiResponseDto apiResponseDto = EmployeeMapper.INSTANCE.maptoApiResponseDto(employeeDto, departmentDto);
+        ApiResponseDto apiResponseDto = EmployeeMapper.INSTANCE.maptoApiResponseDto(employeeDto, departmentDto,organizationDto);
 
         return apiResponseDto;
     }
@@ -86,10 +86,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         departmentDto.setDepartmentDescription("something");
         departmentDto.setDepartmentCode("something");
 
-
+        OrganizationDto organizationDto = webClient.get().uri("http://localhost:8080/api/organizations/"+employee.getDepartmentCode()).retrieve().bodyToMono(OrganizationDto.class).block();
         EmployeeDto employeeDto = EmployeeMapper.INSTANCE.mapToEmployeeDto(employee);
 
-        ApiResponseDto apiResponseDto = EmployeeMapper.INSTANCE.maptoApiResponseDto(employeeDto, departmentDto);
+        ApiResponseDto apiResponseDto = EmployeeMapper.INSTANCE.maptoApiResponseDto(employeeDto, departmentDto,organizationDto);
 
         return apiResponseDto;
     }
