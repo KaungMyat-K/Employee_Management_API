@@ -12,6 +12,7 @@ export default function EmployeeComponent() {
               setEmployee(res.employee)
               setDepartment(res.department)
               setOrganization(res.organization)
+              console.log(employee)
         }).catch((err) => {
           console.log(err)
         });
